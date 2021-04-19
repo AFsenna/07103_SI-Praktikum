@@ -66,7 +66,7 @@ class AuthModel
     {
         $npm = $_POST['npm'];
         $password = $_POST['password'];
-        $data = $this->prosesAuthAslab($npm, $password);
+        $data = $this->prosesAuthPraktikan($npm, $password);
         if ($data) {
             $_SESSION['role'] = 'praktikan';
             $_SESSION['praktikan'] = $data;
