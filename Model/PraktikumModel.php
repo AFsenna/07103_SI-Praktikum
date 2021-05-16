@@ -98,7 +98,9 @@ class PraktikumModel
         $tahun = $_POST['tahun'];
 
         if ($this->prosesStore($nama, $tahun)) {
-            header("location: index.php?page=praktikum&aksi=create&pesan=Gagal Menambah Data");
+            header("location: index.php?page=praktikum&aksi=view&pesan=Berhasil Menambah Data");
+        } else {
+            header("location: index.php?page=praktikum&aksi=create&pesan=gagal Menambah Data");
         }
     }
 
