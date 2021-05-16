@@ -1,4 +1,11 @@
 <?php
+
+/**
+ * Function koneksi digunakan untuk membuat koneksi ke database
+ * dengan tablespace 'db_pendaftaranpraktikum'
+ * @return new mysqli digunakan untuk mengembalikan nilai object pada file mysql
+ */
+
 function koneksi()
 {
     $db_host = "localhost";

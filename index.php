@@ -1,4 +1,11 @@
 <?php
+
+/**
+ * require_once digunakan untuk menyertakan sebuah file php lainnya dan memastikan
+ * file yang disertakan hanya dieksekusi sekali saja, meskipun disertakan
+ * beberapa kali dalam beberapa baris program
+ */
+
 require_once("Koneksi.php");
 require_once("Model/AuthModel.php");
 require_once("Model/PraktikumModel.php");
@@ -13,7 +20,6 @@ if (isset($_GET['page']) && isset($_GET['aksi'])) {
     $page = $_GET['page']; // Berisi nama page
     $aksi = $_GET['aksi']; // Aksi Dari setiap page
 
-    // require_once akan Dirubah Saat Modul 2
     if ($page == "auth") {
         $auth = new AuthModel();
         if ($aksi == 'view') {
@@ -31,7 +37,7 @@ if (isset($_GET['page']) && isset($_GET['aksi'])) {
         } else if ($aksi == 'daftarPraktikan') {
             $auth->daftarPraktikan();
         } else if ($aksi == 'storePraktikan') {
-            header("location: index.php?page=auth&aksi=view");
+            $auth->storePraktikan();
         } else {
             echo "Method Not Found";
         }
@@ -44,9 +50,9 @@ if (isset($_GET['page']) && isset($_GET['aksi'])) {
             } else if ($aksi == 'nilai') {
                 $aslab->nilai();
             } else if ($aksi == 'createNilai') {
-                require_once("View/aslab/createNilai.php");
+                $aslab->createNilai();
             } else if ($aksi == 'storeNilai') {
-                require_once("View/aslab/nilai.php");
+                $aslab->storeNilai();
             } else {
                 echo "Method Not Found";
             }
@@ -60,17 +66,17 @@ if (isset($_GET['page']) && isset($_GET['aksi'])) {
             if ($aksi == 'view') {
                 $praktikum->index();
             } else if ($aksi == 'create') {
-                require_once("View/praktikum/create.php");
+                $praktikum->create();
             } else if ($aksi == 'store') {
-                require_once("View/praktikum/index.php");
+                $praktikum->store();
             } else if ($aksi == 'edit') {
-                require_once("View/praktikum/edit.php");;
+                $praktikum->edit();
             } else if ($aksi == 'update') {
-                require_once("View/praktikum/index.php");
+                $praktikum->update();
             } else if ($aksi == 'aktifkan') {
-                require_once("View/praktikum/index.php");
+                $praktikum->aktifkan();
             } else if ($aksi == 'nonAktifkan') {
-                require_once("View/praktikum/index.php");
+                $praktikum->nonAktifkan();
             } else {
                 echo "Method Not Found";
             }
@@ -84,11 +90,11 @@ if (isset($_GET['page']) && isset($_GET['aksi'])) {
             if ($aksi == 'view') {
                 $modul->index();
             } else if ($aksi == 'create') {
-                require_once("View/modul/create.php");
+                $modul->create();
             } else if ($aksi == 'store') {
-                require_once("View/modul/index.php");
+                $modul->store();
             } else if ($aksi == 'delete') {
-                require_once("View/modul/index.php");
+                $modul->delete();
             } else {
                 echo "Method Not Found";
             }
@@ -102,15 +108,15 @@ if (isset($_GET['page']) && isset($_GET['aksi'])) {
             if ($aksi == 'view') {
                 $praktikan->index();
             } else if ($aksi == 'edit') {
-                require_once("View/praktikan/edit.php");
+                $praktikan->edit();
             } else if ($aksi == 'update') {
-                require_once("View/praktikan/index.php");
+                $praktikan->update();
             } else if ($aksi == 'praktikum') {
                 $praktikan->praktikum();
             } else if ($aksi == 'daftarPraktikum') {
                 $praktikan->daftarPraktikum();
             } else if ($aksi == 'storePraktikum') {
-                require_once("View/praktikan/index.php");
+                $praktikan->StorePraktikum();
             } else if ($aksi == 'nilaiPraktikan') {
                 $praktikan->nilaiPraktikan();
             } else {
@@ -126,9 +132,9 @@ if (isset($_GET['page']) && isset($_GET['aksi'])) {
             if ($aksi == 'view') {
                 $daftarprak->index();
             } else if ($aksi == 'verif') {
-                require_once("View/daftarprak/index.php");
+                $daftarprak->verif();
             } else if ($aksi == 'unVerif') {
-                require_once("View/daftarprak/index.php");
+                $daftarprak->unVerif();
             } else {
                 echo "Method Not Found";
             }

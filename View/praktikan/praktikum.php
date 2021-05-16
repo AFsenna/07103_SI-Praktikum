@@ -28,14 +28,21 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- Diganti Saat Modul 2 -->
-                            <tr>
-                                <td>1</td>
-                                <td>John Doe</td>
-                                <td>
-                                    <a href="index.php?page=praktikan&aksi=nilaiPraktikan&idPraktikum=#" class="btn btn-info">Cek Nilai</a>
-                                </td>
-                            </tr>
+                            <?php
+                            $no = 1;
+                            foreach ($data as $row) : ?>
+                                <tr>
+                                    <td><?= $no ?></td>
+                                    <td><?= $row['namaPraktikum'] ?></td>
+                                    <td>
+                                        <a href="index.php?page=praktikan&aksi=nilaiPraktikan&idPraktikum=<?= $row['idPraktikum'] ?>" class="btn btn-info">Cek Nilai</a>
+                                    </td>
+
+                                </tr>
+                            <?php
+                                $no++;
+                            endforeach;
+                            ?>
                         </tbody>
                     </table>
                 </div>

@@ -21,7 +21,6 @@
                 <div class="card-body">
                     <form action="index.php?page=modul&aksi=store" method="POST">
                         <div class="row">
-                            <!-- Dirubah Saat Modul 2 -->
                             <div class="col">
                                 <label for="">Jumlah Modul : </label>
                                 <select name="modul" class="form-control" required>
@@ -33,7 +32,9 @@
                             <div class="col">
                                 <label for="">Praktikum : </label>
                                 <select name="praktikum" class="form-control" readonly>
-                                    <option value="bd">Basis Data</option>
+                                    <?php foreach ($data as $row) : ?>
+                                        <option value="<?= $row['id'] ?>"><?= $row['nama']; ?></option>
+                                    <?php endforeach; ?>
                                 </select>
                             </div>
                         </div>
