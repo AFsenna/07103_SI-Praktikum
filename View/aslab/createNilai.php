@@ -19,7 +19,7 @@
                     <a href="index.php?page=aslab&aksi=nilai&id=<?= $_GET['id'] ?>" class="btn btn-info float-right">Kembali</a>
                 </div>
                 <div class="card-body">
-                    <form action="index.php?page=aslab&aksi=storeNilai&id=" method="POST">
+                    <form action="index.php?page=aslab&aksi=storeNilai&id=<?= $_GET['id'] ?>" method="POST">
                         <input type="hidden" name="id" value="<?= $_GET['id'] ?>">
                         <div class="row">
                             <div class="col">
