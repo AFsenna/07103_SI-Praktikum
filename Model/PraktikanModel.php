@@ -14,18 +14,6 @@ class PraktikanModel
     }
 
     /**
-     * Function index berfungsi untuk mengatur tampilan awal halaman praktikan
-     */
-
-    public function index()
-    {
-        $id = $_SESSION['praktikan']['id'];
-        $data = $this->get($id);
-        extract($data);
-        require_once("View/praktikan/index.php");
-    }
-
-    /**
      * Function getPraktikum berfungsi untuk mengambil seluruh data praktikum yang aktif
      */
 
@@ -38,17 +26,6 @@ class PraktikanModel
             $hasil[] = $data;
         }
         return $hasil;
-    }
-
-    /**
-     * Function daftarPraktikum berfungsi untuk mengatur tampilan halaman daftar praktikum
-     */
-
-    public function daftarPraktikum()
-    {
-        $data = $this->getPraktikum();
-        extract($data);
-        require_once("View/praktikan/daftarPraktikum.php");
     }
 
     /**
@@ -73,27 +50,15 @@ class PraktikanModel
     }
 
     /**
-     * Function praktikum berfungsi untuk mengatur ke tampilan halaman praktikum praktikan
-     */
-
-    public function praktikum()
-    {
-        $idPraktikan = $_SESSION['praktikan']['id'];
-        $data = $this->getPendaftaranPraktikum($idPraktikan);
-        extract($data);
-        require_once("View/praktikan/praktikum.php");
-    }
-
-    /**
      * Function getmodul berfungsi untuk mengambil data modul dari praktikum yang aktif
      */
 
-    public function getModul()
+    public function getModul($idPraktikum)
     {
         $sql = "SELECT modul.id as idModul,
                modul.nama as namaModul FROM modul
                JOIN praktikum on praktikum.id = modul.praktikum_id
-               WHERE praktikum.status = 1";
+               WHERE modul.praktikum_id = $idPraktikum";
         $query = koneksi()->query($sql);
         $hasil = [];
         while ($data = $query->fetch_assoc()) {
@@ -124,21 +89,6 @@ class PraktikanModel
     }
 
     /**
-     * Function nilaiPraktikum berfungsi untuk mengatur halaman nilai praktikum praktikan
-     */
-
-    public function nilaiPraktikan()
-    {
-        $idPraktikan = $_SESSION['praktikan']['id'];
-        $idPraktikum = $_GET['idPraktikum'];
-        $modul = $this->getModul();
-        $nilai = $this->getNilaiPraktikan($idPraktikan, $idPraktikum);
-        extract($modul);
-        extract($nilai);
-        require_once("View/praktikan/nilaiPraktikan.php");
-    }
-
-    /**
      * Function update berfungsi untuk update data praktikan pada database
      * @param String $nama berisi nama praktikan
      * @param String $npm berisi npm praktikan
@@ -157,37 +107,6 @@ class PraktikanModel
     }
 
     /**
-     * Function edit berfungsi untuk menampilkan form edit
-     */
-
-    public function edit()
-    {
-        $id = $_SESSION['praktikan']['id'];
-        $data = $this->get($id);
-        extract($data);
-        require_once("View/praktikan/edit.php");
-    }
-
-    /**
-     * Function update berfungsi untuk menyimpan hasil edit
-     */
-
-    public function update()
-    {
-        $id = $_POST['id'];
-        $nama = $_POST['nama'];
-        $npm = $_POST['npm'];
-        $no_hp = $_POST['no_hp'];
-        $password = $_POST['password'];
-
-        if ($this->prosesUpdate($nama, $npm, $password, $no_hp, $id)) {
-            header("location: index.php?page=praktikan&aksi=view&pesan=Berhasil Ubah Data");
-        } else {
-            header("location: index.php?page=praktikan&aksi=edit&pesan=Gagal Ubah Data");
-        }
-    }
-
-    /**
      * Function storePraktikum berfungsi untuk input data daftar praktikum ke database
      * @param Integer $idPraktikan berisi id praktikan
      * @param Integer $idPraktikum berisi id praktikum
@@ -199,21 +118,5 @@ class PraktikanModel
          VALUES($idPraktikan,$idPraktikum,0)";
         $query = koneksi()->query($sql);
         return $query;
-    }
-
-    /**
-     * Function storePraktikum yang telah dipilih untuk ditambahkan
-     */
-
-    public function StorePraktikum()
-    {
-        $praktikum = $_POST['praktikum'];
-        $idPraktikan = $_SESSION['praktikan']['id'];
-
-        if ($this->prosesStorePraktikum($idPraktikan, $praktikum)) {
-            header("location: index.php?page=praktikan&aksi=praktikum&pesan=Berhasil Daftar Praktikum");
-        } else {
-            header("location: index.php?page=praktikan&aksi=daftarPraktikum&pesan=Gagal Daftar Praktikum");
-        }
     }
 }

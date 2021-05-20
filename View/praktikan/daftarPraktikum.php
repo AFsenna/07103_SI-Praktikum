@@ -21,7 +21,6 @@
                 <form action="index.php?page=praktikan&aksi=storePraktikum" method="POST">
                     <div class="row">
                         <div class="col">
-                            <!-- Digant saat modul 3 -->
                             <label for="">Praktikum : </label>
                             <select name="praktikum" class="form-control">
                                 <?php foreach ($data as $row) : ?>
@@ -32,7 +31,6 @@
                     </div>
                     <button type="submit" class="btn btn-primary float-right mt-3">Daftar</button>
                 </form>
-
 
             </div>
         </div>

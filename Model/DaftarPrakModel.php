@@ -24,17 +24,6 @@ class DaftarPrakModel
     }
 
     /**
-     * Function index berfungsi untuk mengatur tampilan awal halaman daftar
-     */
-
-    public function index()
-    {
-        $data = $this->get();
-        extract($data);
-        require_once("View/daftarprak/index.php");
-    }
-
-    /**
      * @param Integer id berisi id
      * @param Integer idAslab berisi id aslab
      * Function prosesVerif berfungsi unuk update status pada database menjadi telah diverifikasi
@@ -60,35 +49,5 @@ class DaftarPrakModel
         $sqlUpdate = "UPDATE daftarprak SET status=0, aslab_id = NULL WHERE id = $id";
         $query = koneksi()->query($sqlUpdate);
         return $query;
-    }
-
-    /**
-     * Function verif berfungsi untuk memverifikasi praktikan yang sudah mendaftar praktikum
-     */
-
-    public function verif()
-    {
-        $id = $_GET['id'];
-        $idAslab = $_SESSION['aslab']['id'];
-        if ($this->prosesVerif($id, $idAslab)) {
-            header("location: index.php?page=daftarprak&aksi=view&pesan=Berhasil Verif Praktikan");
-        } else {
-            header("location: index.php?page=daftarprak&aksi=view&pesan=Gagal Verif Praktikan");
-        }
-    }
-
-    /**
-     * Function unVerif digunakan untuk membatalkan verifikasi
-     */
-
-    public function unVerif()
-    {
-        $id = $_GET['id'];
-        $idPraktikan = $_GET['idPraktikan'];
-        if ($this->prosesUnVerif($id, $idPraktikan)) {
-            header("location: index.php?page=daftarprak&aksi=view&pesan=Berhasil Un-Verif Praktikan");
-        } else {
-            header("location: index.php?page=daftarprak&aksi=view&pesan=Gagal Un-Verif Praktikan");
-        }
     }
 }

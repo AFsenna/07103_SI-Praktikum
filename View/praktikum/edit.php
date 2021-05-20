@@ -20,7 +20,6 @@
                 </div>
                 <div class="card-body">
                     <form action="index.php?page=praktikum&aksi=update" method="POST">
-                        <!-- Digant saat modul 3 -->
                         <input type="hidden" name="id" value="<?= $data['id'] ?>">
                         <div class="row">
                             <div class="col">

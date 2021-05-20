@@ -28,18 +28,6 @@ class AslabModel
     }
 
     /**
-     * Function index berfungsi untuk mengatur tampilan awal
-     */
-
-    public function index()
-    {
-        $idAslab = $_SESSION['aslab']['id'];
-        $data = $this->get($idAslab);
-        extract($data);
-        require_once("View/aslab/index.php");
-    }
-
-    /**
      * Function getModul berfungsi untuk mengambil seluruh data modul
      */
 
@@ -78,20 +66,6 @@ class AslabModel
     }
 
     /**
-     * Function nilai berfungsi untuk mengatur tampilan halaman data nilai praktikan
-     */
-
-    public function nilai()
-    {
-        $idPraktikan = $_GET['id'];
-        $modul = $this->getModul();
-        $nilai = $this->getNilaiPraktikan($idPraktikan);
-        extract($modul);
-        extract($nilai);
-        require_once("View/aslab/nilai.php");
-    }
-
-    /**
      * Function prosesStoreNilai berfungsi untuk melakukan insert nilai praktikan
      * ke database nilai sesuai id praktikan dan id permodul
      * @param Integer $idModul berisi id modul
@@ -114,34 +88,5 @@ class AslabModel
             $query = koneksi()->query($sqlUpdate);
         }
         return $query;
-    }
-
-    /**
-     * Function storeNilai berfungsi untuk menyimpan data nilai
-     * sesuai id praktikan dari form yang telah diisi aslab
-     * pada halaman createNilai.php 
-     */
-
-    public function storeNilai()
-    {
-        $idModul = $_POST['modul'];
-        $idPraktikan = $_POST['id'];
-        $nilai = $_POST['nilai'];
-        if ($this->prosesStoreNilai($idModul, $idPraktikan, $nilai)) {
-            header("location: index.php?page=aslab&aksi=nilai&pesan=Berhasil Tambah Data&id=$idPraktikan");
-        } else {
-            header("location: index.php?page=aslab&aksi=createNilai&pesan=Gagal Tambah Data&id=$idPraktikan");
-        }
-    }
-
-    /**
-     * Function createNilai berfungsi untuk mengatur ke halaman input nilai
-     */
-
-    public function createNilai()
-    {
-        $modul = $this->getModul();
-        extract($modul);
-        require_once('View/aslab/createNilai.php');
     }
 }
